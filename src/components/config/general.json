@@ -1,0 +1,12 @@
+{
+    "client": {
+        "token": "",
+        "default_prefix": "m."
+    },
+
+    "owner": {
+        "name": "Pedrão",
+        "discriminator": "1007",
+        "id":"476373357756022787"
+    }
+}
