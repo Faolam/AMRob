@@ -18,7 +18,7 @@ module.exports = {
         );
         status (
             bot,
-            "idle" //dnd //idle //invisible //online
+            "dnd" //dnd //idle //invisible //online
         );
 
         // Console Informations
