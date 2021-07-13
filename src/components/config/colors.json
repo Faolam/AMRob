@@ -1,0 +1,24 @@
+{
+    "Claras": {
+        "Vermelho": "#FF0400",
+        "Laranja": "#FF7400",
+        "Amarelo": "#FFE400",
+        "Verde": "#1FFF00",
+        "Azul": "#00FFC9",
+        "Roxo": "#B600FF",
+        "Rosa": "#FF00E4",
+        "Branco": "#FFFFFF",
+        "Preto": "#000000"
+    },
+    "Escuras": {
+        "Vermelho": "#A80000",
+        "Laranja": "#A84700",
+        "Amarelo": "#A0A800",
+        "Verde": "#0FA800",
+        "Azul": "#002BA8",
+        "Roxo": "#9900A8",
+        "Rosa": "#A80070",
+        "Branco": "#DFEBE9",
+        "Preto": "#2A302F"
+    }
+}
