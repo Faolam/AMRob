@@ -1,7 +1,8 @@
 // Importações
 const adapter = require('../../components/database/adapter/adapter');
+const { class1, class2, class3 } = require('../../components/include/permissions')
 const { MessageEmbed } = require('discord.js');
-const { client } = require('../../components/config/general.json');
+const { client, owner } = require('../../components/config/general.json');
 const { simple } = require('../../components/include/embeds');
 const { Claras, Escuras } = require('../../components/config/colors.json')
 const { Estaticos, Animados } = require('../../components/include/emojis.json')
@@ -29,9 +30,66 @@ module.exports = {
                 if (command === undefined) return msg.channel.send("```❌ ERRO | Comando não encontrado!```");
 
                 if (command.perms.permissions_level.length > 0) {
-                    msg.channel.send("```Comando possui permissões```")
+                    switch(command.perms.permissions_level) {
+                        case "owner":
+                            if (msg.author.id === owner.id) {
+                                EXECUTE(bot, msg, args)
+                            } else {
+                                msg.channel.send("```❌ ERRO | Esse comando é restrito à categoria OWNER (Administradores/Criador)```").then(() => {msg.react(Animados.Esclamação)})
+                            }
+                            break;
+                        case "class1":
+                            VERIFY( class1 )
+                            break;
+                        case "class2":
+                            VERIFY( class2 )
+                            break;
+                        case "class3":
+                            VERIFY( class3 )
+                            break;
+                        default:
+                            return console.log("Erro Ocorrido na leitura de permissões.\nNão foram encontradas categorias que correspondam a: " + command.perms.permissions_level)
+                    }
                 } else {
                     msg.channel.send("```Comando não possui permissões```")
+                }
+
+                function VERIFY( TypeClass ) {
+                    var n = 0;
+                    var result = "Any";
+                    var PermsNumber = TypeClass.length
+                    
+                    while (n < 1) {
+                        let perm = TypeClass[PermsNumber -1];
+
+                        if (msg.guild.member(msg.author).hasPermission(perm) === true) {
+                            if (PermsNumber > 1) {
+                                PermsNumber = PermsNumber - 1
+                            } else {
+                                result = true
+                                n++
+                            }
+                        } else {
+                            n++
+                            result = false
+                        }
+                    }
+
+                    switch (result) {
+                        case true:
+                            EXECUTE(bot, msg, args)
+                            break;
+                        case false:
+                            msg.channel.send("```❌ ERRO | Permissões não encontradas. Esse comando necessita de permissões '" + command.perms.permissions_level + "'```");
+                            break;
+                        default:
+                            console.log(" {Como chegou aqui?} ");
+                            break;
+                    };
+                }
+
+                function EXECUTE(bot, msg, args) {
+                    command.exe(bot, msg, args)
                 }
 
             }
@@ -74,7 +132,7 @@ module.exports = {
 
                                 `https://cdn.discordapp.com/icons/${msg.guild.id}/${msg.guild.icon}.png`,
 
-                                Animados.Dino + " Olá " + msg.author.toString() + "!\nÉ com grande prazer que lhe dou as Boas Vindas ao mundo ***AMRob*** para moderadores! Bem, mais antes de continuarmos preciso esclarecer-lhe alguns aspectos.\n" +Animados.Verified + " **Aspectos:**\n```Possuo inúmeras funcionalidades quando o assunto é administração e organização do servidor, para tanto, existem algumas que somente são disponibilizadas para organizadores que possuem uma conta premium para esse robô. Deseja entende-las? Consulte: '" + client.default_prefix + "MANUTENÇÂO'. A partir disso é preciso que sejam, mais a frente, esclarecidos todos os meus requisitos.```\n" + Estaticos.Link + " **Status de Conta:**\n```Plano = " + await adapter.RequestValues(msg.guild.id, "plan") + "```",
+                                Animados.Dino + " Olá " + msg.author.toString() + "!\nÉ com grande prazer que lhe dou as Boas Vindas ao mundo ***AMRob*** para moderadores! Bem, mas antes de continuarmos preciso esclarecer-lhe alguns aspectos.\n" +Animados.Verified + " **Aspectos:**\n```Possuo inúmeras funcionalidades quando o assunto é administração e organização do servidor, para tanto, existem algumas que somente são disponibilizadas para organizadores que possuem uma conta premium para esse robô. Deseja entende-las? Consulte: '" + client.default_prefix + "MANUTENÇÂO'. A partir disso é preciso que sejam, mais a frente, esclarecidos todos os meus requisitos.```\n" + Estaticos.Link + " **Status de Conta:**\n```Plano = " + await adapter.RequestValues(msg.guild.id, "plan") + "```",
 
                                 "Novo Status para " + msg.author.username,
 

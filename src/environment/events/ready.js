@@ -10,7 +10,7 @@ module.exports = {
             [
                 "🚧 Sou um robô de moderação!",
                 "⏰ Fui criado recentemente!",
-                "📋 Estou na versão v0.01",
+                "📋 Estou na versão v0.02",
                 "💎 Tentarei deixar tudo mais organizado."
             ],
             "COMPETING", // PLAYING // STREAMING // LISTENING // WATCHING // CUSTOM_STATUS // COMPETING
