@@ -5,7 +5,7 @@ module.exports = {
     },
     help: {
         name: "ping",
-        aliases: []
+        aliases: ["p"]
     },
     perms: {
         permissions_level: "class1"

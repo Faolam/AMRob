@@ -30,6 +30,9 @@ readdir(events_directory, (e, archives) => {
                     case "addcommands":
                         bot.on("ready", () => { running.exe( bot ) });
                         break;
+                    case "mention":
+                        bot.on("message", (msg) => { running.exe( bot, msg ) });
+                        break;
                     default:
                         bot.on(`${type}`, (...tasks) => { running.exe( bot, ...tasks ) });
                         break;
