@@ -45,12 +45,19 @@ module.exports = {
                             Reaction.delete();
                             msg.channel.send(simple(
                                 bot.user.username,
+
                                 Claras.Verde,
+
                                 Estaticos.Correto + " Sucesso ao Adicionar o Servidor",
+
                                 `https://cdn.discordapp.com/icons/${msg.guild.id}/${msg.guild.icon}.png`,
-                                Animados.Dino + " Olá " + msg.author.toString() + "!\nÉ com grande prazer que lhe dou as Boas Vindas ao mundo ***AMRob*** para moderadores! Bem, mais antes de continuarmos preciso esclarecer-lhe alguns aspectos.\n**Aspectos:**\n`Possuo inúmeras funcionalidades quando o assunto é administração e organização do servidor, para tanto, existem algumas que somente são disponibilizadas para organizadores que possuem uma conta premium para esse robô. Deseja entende-las? Consulte: '" + client.default_prefix + "MANUTENÇÂO'. A partir disso é preciso que sejam, mais a frente, esclarecidos todos os meus requisitos.`\n **Status de Conta:**\n" + Estaticos.Link + "Plano = " + await adapter.RequestValues(msg.guild.id, "plan"),
+
+                                Animados.Dino + " Olá " + msg.author.toString() + "!\nÉ com grande prazer que lhe dou as Boas Vindas ao mundo ***AMRob*** para moderadores! Bem, mais antes de continuarmos preciso esclarecer-lhe alguns aspectos.\n" +Animados.Verified + " **Aspectos:**\n```Possuo inúmeras funcionalidades quando o assunto é administração e organização do servidor, para tanto, existem algumas que somente são disponibilizadas para organizadores que possuem uma conta premium para esse robô. Deseja entende-las? Consulte: '" + client.default_prefix + "MANUTENÇÂO'. A partir disso é preciso que sejam, mais a frente, esclarecidos todos os meus requisitos.```\n" + Estaticos.Link + " **Status de Conta:**\n```Plano = " + await adapter.RequestValues(msg.guild.id, "plan") + "```",
+
                                 "Novo Status para " + msg.author.username,
+
                                 bot.user.displayAvatarURL({dynamic: true, format: "png", size: 1024}),
+
                                 msg.author.displayAvatarURL({dynamic: true, format: "png", size: 1024})
                             ));
                         } catch(error) {
@@ -58,12 +65,19 @@ module.exports = {
                             Reaction.delete();
                             msg.channel.send(simple(
                                 bot.user.username,
+
                                 Claras.Vermelho,
+
                                 Estaticos.Errado + "  Erro ao Adicionar o Servidor",
+
                                 `https://cdn.discordapp.com/icons/${msg.guild.id}/${msg.guild.icon}.png`,
+
                                 Estaticos.Computador + " Olá " + msg.author.toString() + "!\nNão foi possível criar uma conta em meu banco de dados para esse servidor. Me parece que foi um erro interno, por isso, contate meu **surpevisor/administrador**, ***Pedrão#1007***, e descreva o problema.\n" + Animados.DiscordLove + " Obrigado novamente pela ajuda, grande abraço!",
+
                                 "Aviso para " + msg.author.username,
+
                                 bot.user.displayAvatarURL({dynamic: true, format: "png", size: 1024}),
+
                                 msg.author.displayAvatarURL({dynamic: true, format: "png", size: 1024})
                             ));
                         }

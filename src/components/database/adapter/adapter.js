@@ -47,7 +47,7 @@ class MysqlAdapter {
 
             const component = await Servers.findOne({ where: { GuildId: id } });
 
-            switch (suplic.toLowercase()) {
+            switch (suplic) {
                 case "ownername":
                     let NOwnerName = component.OwnerName
                     return NOwnerName;
@@ -80,7 +80,7 @@ class MysqlAdapter {
 
             const component = await Servers.findOne({ where: { GuildId: id } });
 
-            switch(suplic.toLowercase()) {
+            switch(suplic) {
                 case "ownername":
                     try {
                         component.OwnerName = mod;
