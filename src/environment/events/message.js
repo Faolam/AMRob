@@ -17,17 +17,39 @@ module.exports = {
             await adapter.SyncDB();
 
             if (await adapter.StatusServer( msg.guild.id ) == true) {
-                msg.channel.send("Esse servidor está em meu Banco de Dados")
+                // msg.channel.send("Esse servidor está em meu Banco de Dados")
+
+                const args = msg.content.split(' ');
+                let command = args.shift().slice(client.default_prefix.length).toLowerCase()
+
+                command = bot.commands.get(command) || bot.commands.find(cmd => {
+                    if (cmd.help.aliases.includes(command) === true) return cmd
+                })
+
+                if (command === undefined) return msg.channel.send("```❌ ERRO | Comando não encontrado!```");
+
+                if (command.perms.permissions_level.length > 0) {
+                    msg.channel.send("```Comando possui permissões```")
+                } else {
+                    msg.channel.send("```Comando não possui permissões```")
+                }
+
             }
             if (await adapter.StatusServer( msg.guild.id ) == false) {
                 msg.channel.send(simple(
-                    bot.user.username, 
-                    Claras.Amarelo, 
+                    bot.user.username,
+
+                    Claras.Amarelo,
+
                     Animados.Esclamação + "  Servidor Não Localizado",
+
                     `https://cdn.discordapp.com/icons/${msg.guild.id}/${msg.guild.icon}.png`,
+
                     Animados.Esmeralda + " Olá " + msg.author.toString() + "!\nNão foi possível encontrar esse servidor em meu ***Banco de Dados***. É aconselhado que seja criada uma nova **sessão** para esse fim. \n***Deseja faze-la agora?***",
                     "Mensagem para " + msg.author.username,
+
                     bot.user.displayAvatarURL({dynamic: true, format: "png", size: 1024}),
+
                     msg.author.displayAvatarURL({dynamic: true, format: "png", size: 1024})
                 )).then(Reaction => {
                     Reaction.react(Estaticos.Correto)

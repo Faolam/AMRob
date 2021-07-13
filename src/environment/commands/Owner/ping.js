@@ -8,7 +8,6 @@ module.exports = {
         aliases: []
     },
     perms: {
-        permissions_level: "owner",
-        Bitwise_Permissions_Flags: [] 
+        permissions_level: "owner"
     }
 }
