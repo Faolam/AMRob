@@ -8,6 +8,7 @@ module.exports = {
         aliases: ["p"]
     },
     perms: {
-        permissions_level: "class1"
+        permissions_level: "owner",
+        plan: "Premium"
     }
 }

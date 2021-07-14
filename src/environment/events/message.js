@@ -33,19 +33,22 @@ module.exports = {
                     switch(command.perms.permissions_level) {
                         case "owner":
                             if (msg.author.id === owner.id) {
-                                EXECUTE(bot, msg, args)
+                                await PLAN(bot, msg, args)
                             } else {
                                 msg.channel.send("```❌ ERRO | Esse comando é restrito à categoria OWNER (Administradores/Criador)```").then(() => {msg.react(Animados.Esclamação)})
                             }
                             break;
                         case "class1":
-                            VERIFY( class1 )
+                            await VERIFY( class1 );
                             break;
                         case "class2":
-                            VERIFY( class2 )
+                            await VERIFY( class2 );
                             break;
                         case "class3":
-                            VERIFY( class3 )
+                            await VERIFY( class3 );
+                            break;
+                        case "any":
+                            EXECUTE(bot, msg, args);
                             break;
                         default:
                             return console.log("Erro Ocorrido na leitura de permissões.\nNão foram encontradas categorias que correspondam a: " + command.perms.permissions_level)
@@ -54,7 +57,7 @@ module.exports = {
                     msg.channel.send("```Comando não possui permissões```")
                 }
 
-                function VERIFY( TypeClass ) {
+                async function VERIFY( TypeClass ) {
                     var n = 0;
                     var result = "Any";
                     var PermsNumber = TypeClass.length
@@ -77,15 +80,32 @@ module.exports = {
 
                     switch (result) {
                         case true:
-                            EXECUTE(bot, msg, args)
+                            await PLAN(bot, msg, args)
                             break;
                         case false:
                             msg.channel.send("```❌ ERRO | Permissões não encontradas. Esse comando necessita de permissões '" + command.perms.permissions_level + "'```");
                             break;
                         default:
-                            console.log(" {Como chegou aqui?} ");
+                            console.log(" { Como chegou aqui? } ");
                             break;
                     };
+                }
+
+                async function PLAN(bot, msg, args) {
+                    let command_plan_type = await adapter.RequestValues(msg.guild.id, "plan");
+
+                    let guild_plan_type = command.perms.plan
+                    try {
+                        if (command_plan_type == guild_plan_type) {
+                            EXECUTE(bot, msg, args)
+                        }
+                        if (command_plan_type !== guild_plan_type) {
+                            msg.channel.send("```🙁 ERRO Ocorrido:\n🔒 Parece que este servidor não possui o tipo de conta necessária para a realização do comando.\n🔑 Faça um Upgrade sempre que quiser!\n\n🔴 Conta para " + msg.guild.name + ": " + command_plan_type + "\n🟢 Conta necessária: " + guild_plan_type + "```")
+                        }
+                    } catch( err ) {
+                        console.log("Erro detectado: \n" + err)
+                    }
+                    // console.log(command_plan_type, guild_plan_type)
                 }
 
                 function EXECUTE(bot, msg, args) {
